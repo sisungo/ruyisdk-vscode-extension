@@ -272,7 +272,7 @@ export class ManageService implements vscode.Disposable {
       1000,
     )
     this.statusBarItem.command = 'ruyi.setup.manage'
-    this.statusBarItem.text = '$(tools) <No RuyiSDK>'
+    this.statusBarItem.text = '$(x) <No RuyiSDK>'
     this.statusBarItem.tooltip = 'Click to select RuyiSDK installation'
     this.statusBarItem.show()
     context.subscriptions.push(this.statusBarItem)
@@ -338,7 +338,7 @@ export class ManageService implements vscode.Disposable {
     }
 
     if (!currentPath) {
-      this.statusBarItem.text = '$(tools) <No RuyiSDK>'
+      this.statusBarItem.text = '$(x) <No RuyiSDK>'
       this.statusBarItem.tooltip = 'Click to select RuyiSDK installation'
       return
     }
@@ -354,7 +354,7 @@ export class ManageService implements vscode.Disposable {
     }
     else {
       const pathInfo = configuration.ruyiPath ? 'RuyiSDK' : 'RuyiSDK (Auto-detected)'
-      this.statusBarItem.text = `$(tools) ${path.basename(currentPath)}`
+      this.statusBarItem.text = `$(warning) ${path.basename(currentPath)}`
       this.statusBarItem.tooltip = `${pathInfo}: ${path.dirname(currentPath)}`
     }
   }
