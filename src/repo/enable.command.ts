@@ -10,6 +10,7 @@ export async function enableRepoCommand(repoId: string): Promise<void> {
   else {
     vscode.window.showErrorMessage(vscode.l10n.t('Failed to enable repository {0}: {1}', repoId, result.stderr || 'Unknown error'))
   }
+  await vscode.commands.executeCommand('ruyi.packages.shallow-refresh')
 }
 
 /**

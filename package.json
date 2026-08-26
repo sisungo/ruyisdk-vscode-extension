@@ -224,6 +224,12 @@
         "icon": "$(trash)"
       },
       {
+        "command": "ruyi.packages.shallow-refresh",
+        "title": "%contributes.commands.ruyi.packages.shallow-refresh.title%",
+        "category": "Ruyi",
+        "icon": "$(refresh)"
+      },
+      {
         "command": "ruyi.packages.refresh",
         "title": "%contributes.commands.ruyi.packages.refresh.title%",
         "category": "Ruyi",

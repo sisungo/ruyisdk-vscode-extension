@@ -29,6 +29,8 @@ export async function setPriorityCommand(repoId: string): Promise<void> {
       repoId, result.stderr || 'Unknown error',
     ))
   }
+
+  await vscode.commands.executeCommand('ruyi.packages.shallow-refresh')
 }
 
 /**

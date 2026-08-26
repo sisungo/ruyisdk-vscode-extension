@@ -8,6 +8,7 @@ import { PackagesTreeProvider } from './package-tree.provider'
 import { PackageService } from './package.service'
 import registerRefreshCommand from './refresh.command'
 import registerSearchCommand from './search.command'
+import registerShallowRefreshCommand from './shallow-refresh.command'
 import registerUninstallCommand from './uninstall.command'
 
 export default function registerPackagesModule(ctx: vscode.ExtensionContext) {
@@ -24,6 +25,7 @@ export default function registerPackagesModule(ctx: vscode.ExtensionContext) {
   void packagesTreeProvider.shallowRefresh()
 
   registerCopyPackageIdCommand(ctx)
+  registerShallowRefreshCommand(ctx, packagesTreeProvider)
   registerInstallCommand(ctx, packagesTreeProvider)
   registerUninstallCommand(ctx, packagesTreeProvider)
   registerRefreshCommand(ctx, packagesTreeProvider)
