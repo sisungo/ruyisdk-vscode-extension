@@ -79,6 +79,9 @@ export async function addRepoCommand(): Promise<void> {
       id, result.stderr || 'Unknown error',
     ))
   }
+
+  // 8. Refresh Package Tree UI
+  await vscode.commands.executeCommand('ruyi.packages.shallow-refresh')
 }
 
 /**

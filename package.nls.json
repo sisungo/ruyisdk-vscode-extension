@@ -34,6 +34,7 @@
     "contributes.commands.ruyi.packages.clearSearch.title": "Clear Package Search",
     "contributes.commands.ruyi.packages.install.title": "Install Package",
     "contributes.commands.ruyi.packages.uninstall.title": "Uninstall Package",
+    "contributes.commands.ruyi.packages.shallow-refresh.title": "Reload Package Tree UI",
     "contributes.commands.ruyi.packages.refresh.title": "Update Package Manager Index",
     "contributes.commands.ruyi.packages.copyPackageId.title": "Copy Package ID",
     "contributes.commands.ruyi.venv.refresh.title": "Detect Venvs",
