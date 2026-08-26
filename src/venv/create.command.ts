@@ -4,6 +4,7 @@ import * as vscode from 'vscode'
 
 import { getWorkspaceFolderPath } from '../common/helpers'
 
+import { PkgInfo } from './types'
 import { ruyiVersionIsAbove } from './venv.helper'
 import type { VenvService } from './venv.service'
 
@@ -131,16 +132,12 @@ export async function createVenvCommand(service: VenvService): Promise<void> {
   const toolchains = await service.getToolchains()
   const toolchainItems: ToolchainPick[] = toolchains.map(toolchain => ({
     label: toolchain.name,
-    description: toolchain.version ? `v${toolchain.version}` : undefined,
-    detail: [
-      toolchain.latest ? vscode.l10n.t('Latest') : vscode.l10n.t('Legacy'),
-      toolchain.installed ? vscode.l10n.t('Installed') : undefined,
-      toolchain.slug ? vscode.l10n.t('Slug: {0}', toolchain.slug) : undefined,
-    ].filter(Boolean).join(' • '),
+    description: toolchain.semver ? `v${toolchain.semver}` : undefined,
+    detail: buildPackageDetailDisplay(toolchain),
     rawName: toolchain.name,
-    version: toolchain.version,
-    latest: toolchain.latest,
-    installed: toolchain.installed,
+    version: toolchain.semver,
+    latest: toolchain.remarks.includes('latest'),
+    installed: toolchain.remarks.includes('installed'),
     quirks: toolchain.quirks,
   })).filter(tc => neededQuirks.every(quirk => tc.quirks.includes(quirk)))
 
@@ -446,10 +443,7 @@ async function selectSysrootPkg(service: VenvService): Promise<string> {
     return {
       label: [icons, sp.name].filter(Boolean).join(' '),
       description: sp.semver ? `v${sp.semver}` : undefined,
-      detail: [
-        isLatest ? 'Latest' : 'Legacy',
-        isInstalled ? 'Installed' : undefined,
-      ].filter(Boolean).join('   '),
+      detail: buildPackageDetailDisplay(sp),
       rawName: sp.name,
       version: sp.semver,
       latest: isLatest,
@@ -482,6 +476,15 @@ async function selectSysrootDir(): Promise<string> {
   }
 
   return dir[0].fsPath
+}
+
+function buildPackageDetailDisplay(pkginfo: PkgInfo): string {
+  const isLatest = pkginfo.remarks.includes('latest')
+  const isInstalled = pkginfo.remarks.includes('installed')
+  return [
+    isLatest ? vscode.l10n.t('Latest') : vscode.l10n.t('Legacy'),
+    isInstalled ? vscode.l10n.t('Installed') : undefined,
+  ].filter(Boolean).join(' • ')
 }
 
 /**
