@@ -59,10 +59,7 @@ export function parseToolchains(output: string): Toolchain[] {
 
       result.push({
         name,
-        version: semver,
-        installed: remarks.includes('installed'),
-        latest: remarks.includes('latest'),
-        slug: v.pm?.metadata?.slug || null,
+        semver,
         remarks,
         included_sysroot: v.pm?.toolchain?.included_sysroot,
         quirks: v.pm?.toolchain?.quirks || [],
@@ -70,7 +67,7 @@ export function parseToolchains(output: string): Toolchain[] {
     }
   }
 
-  sortByNameThenVersion(result, t => t.version)
+  sortByNameThenVersion(result, t => t.semver)
 
   return result
 }

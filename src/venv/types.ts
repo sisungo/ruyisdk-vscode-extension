@@ -23,19 +23,7 @@ export type VenvStateListener = (venvPath: string | null) => void
 /**
  * Represents a Ruyi toolchain package.
  */
-export interface Toolchain {
-  /** Toolchain package name */
-  name: string
-  /** Semantic version of the toolchain */
-  version: string
-  /** Whether the toolchain is installed locally */
-  installed: boolean
-  /** Whether this is the latest version */
-  latest: boolean
-  /** Package slug for installation */
-  slug: string | null
-  /** Installation status remarks (e.g. ['installed', 'latest']) */
-  remarks: string[]
+export interface Toolchain extends PkgInfo {
   /** Included sysroot of the package */
   included_sysroot?: string
   /** Quirks included in the package */
