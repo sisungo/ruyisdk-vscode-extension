@@ -309,16 +309,16 @@ export class VersionItem extends vscode.TreeItem {
   private buildDescription(): string {
     const tags: string[] = []
     if (this.versionInfo.isLatest) {
-      tags.push('latest')
+      tags.push(vscode.l10n.t('latest'))
     }
     if (this.versionInfo.isPrerelease) {
-      tags.push('prerelease')
+      tags.push(vscode.l10n.t('prerelease'))
     }
     if (this.versionInfo.isLatestPrerelease) {
-      tags.push('latest-prerelease')
+      tags.push(vscode.l10n.t('latest-prerelease'))
     }
     if (!this.versionInfo.isBinaryAvailable) {
-      tags.push('no binary')
+      tags.push(vscode.l10n.t('no binary'))
     }
     if (this.versionInfo.slug) {
       tags.push(`slug: ${this.versionInfo.slug}`)
